@@ -1,0 +1,60 @@
+local SwordLadder = {
+    {
+        id = "linked_sword",
+        toolName = "Linked Sword",
+        baseDamage = 20,
+        damageScale = 1.0,
+        swingCooldown = 0.55,
+        tier = 0,
+    },
+    {
+        id = "venomshank",
+        toolName = "Venomshank",
+        baseDamage = 22,
+        damageScale = 1.08,
+        swingCooldown = 0.54,
+        tier = 1,
+    },
+    {
+        id = "firebrand",
+        toolName = "Firebrand",
+        baseDamage = 24,
+        damageScale = 1.15,
+        swingCooldown = 0.53,
+        tier = 2,
+    },
+    {
+        id = "ice_dagger",
+        toolName = "Ice Dagger",
+        baseDamage = 26,
+        damageScale = 1.22,
+        swingCooldown = 0.52,
+        tier = 3,
+    },
+    {
+        id = "ghostwalker",
+        toolName = "Ghostwalker",
+        baseDamage = 28,
+        damageScale = 1.3,
+        swingCooldown = 0.5,
+        tier = 4,
+    },
+    {
+        id = "illumina",
+        toolName = "Illumina",
+        baseDamage = 30,
+        damageScale = 1.38,
+        swingCooldown = 0.48,
+        tier = 5,
+    },
+    {
+        id = "darkheart",
+        toolName = "Darkheart",
+        baseDamage = 34,
+        damageScale = 1.5,
+        swingCooldown = 0.46,
+        tier = 6,
+    },
+}
+
+return table.freeze(SwordLadder)

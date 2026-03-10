@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rojo-rbx/rojo/master/docs/static/schemas/project.schema.json",
+  "name": "FFASwordLadder",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Config": {
+        "$path": "src/ReplicatedStorage/Config"
+      },
+      "Shared": {
+        "$path": "src/ReplicatedStorage/Shared"
+      }
+    },
+    "ServerScriptService": {
+      "$path": "src/ServerScriptService"
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "$path": "src/StarterPlayer/StarterPlayerScripts"
+      }
+    }
+  }
+}

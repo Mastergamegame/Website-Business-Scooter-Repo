@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tired of Slow Support? Sell Your E-Scooter Instead</title>
+    <meta
+      name="description"
+      content="A simple Stockholm lead page for people who want to sell a faulty or unwanted e-scooter instead of waiting on slow support or refund delays."
+    />
+    <meta name="theme-color" content="#11263b" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "ScootRetur Stockholm",
+        "description": "Independent Stockholm buyback service for used or faulty e-scooters.",
+        "areaServed": "Stockholm, Sweden",
+        "email": "[Email Address]"
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar container">
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="brand__logo" aria-hidden="true">SR</span>
+          <span class="brand__name company-name">ScootRetur Stockholm</span>
+        </a>
+
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-toggle__button is-active" type="button" data-switch-lang="sv">SV</button>
+          <button class="lang-toggle__button" type="button" data-switch-lang="en">EN</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="section hero" id="top">
+          <div class="container hero__layout">
+            <div class="hero__main card">
+              <p class="eyebrow" data-i18n="hero_eyebrow"></p>
+              <h1 data-i18n="hero_title"></h1>
+              <p class="lead" data-i18n="hero_subtitle"></p>
+
+              <div class="hero__actions">
+                <a class="button button--primary" href="#contact" data-i18n="hero_cta_primary"></a>
+                <a class="button button--secondary" href="#how-it-works" data-i18n="hero_cta_secondary"></a>
+              </div>
+
+              <p class="hero__note" data-i18n="hero_note"></p>
+
+              <ul class="chip-list" aria-label="Offer details">
+                <li data-i18n="hero_chip_1"></li>
+                <li data-i18n="hero_chip_2"></li>
+                <li data-i18n="hero_chip_3"></li>
+              </ul>
+            </div>
+
+            <aside class="hero__side card card--dark">
+              <p class="pill" data-i18n="hero_side_kicker"></p>
+              <h2 data-i18n="hero_side_title"></h2>
+              <p class="hero__side-copy" data-i18n="hero_side_body"></p>
+
+              <div class="info-grid">
+                <div class="info-card">
+                  <span data-i18n="hero_info_area_label"></span>
+                  <strong data-i18n="hero_info_area_value"></strong>
+                </div>
+                <div class="info-card">
+                  <span data-i18n="hero_info_focus_label"></span>
+                  <strong data-i18n="hero_info_focus_value"></strong>
+                </div>
+                <div class="info-card">
+                  <span data-i18n="hero_info_handoff_label"></span>
+                  <strong data-i18n="hero_info_handoff_value"></strong>
+                </div>
+              </div>
+
+              <p class="hero__legal" data-i18n="hero_legal"></p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section steps" id="how-it-works">
+          <div class="container">
+            <div class="section-heading">
+              <p class="eyebrow" data-i18n="steps_eyebrow"></p>
+              <h2 data-i18n="steps_title"></h2>
+              <p class="section-copy" data-i18n="steps_subtitle"></p>
+            </div>
+
+            <div class="steps-grid">
+              <article class="step-card card">
+                <span class="step-card__number">1</span>
+                <h3 data-i18n="step_1_title"></h3>
+                <p data-i18n="step_1_body"></p>
+              </article>
+              <article class="step-card card">
+                <span class="step-card__number">2</span>
+                <h3 data-i18n="step_2_title"></h3>
+                <p data-i18n="step_2_body"></p>
+              </article>
+              <article class="step-card card">
+                <span class="step-card__number">3</span>
+                <h3 data-i18n="step_3_title"></h3>
+                <p data-i18n="step_3_body"></p>
+              </article>
+              <article class="step-card card">
+                <span class="step-card__number">4</span>
+                <h3 data-i18n="step_4_title"></h3>
+                <p data-i18n="step_4_body"></p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section contact" id="contact">
+          <div class="container contact__layout">
+            <div class="contact__intro">
+              <p class="eyebrow eyebrow--light" data-i18n="contact_eyebrow"></p>
+              <h2 data-i18n="contact_title"></h2>
+              <p class="section-copy section-copy--light" data-i18n="contact_body"></p>
+
+              <div class="contact-cards">
+                <div class="contact-card">
+                  <span data-i18n="contact_soft_1_label"></span>
+                  <strong data-i18n="contact_soft_1_value"></strong>
+                </div>
+                <div class="contact-card">
+                  <span data-i18n="contact_soft_2_label"></span>
+                  <strong data-i18n="contact_soft_2_value"></strong>
+                </div>
+                <div class="contact-card">
+                  <span data-i18n="contact_soft_3_label"></span>
+                  <strong data-i18n="contact_soft_3_value"></strong>
+                </div>
+              </div>
+            </div>
+
+            <form id="lead-form" class="lead-form card" novalidate>
+              <label>
+                <span data-i18n="form_name"></span>
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>
+                <span data-i18n="form_contact"></span>
+                <input type="text" name="contact" autocomplete="email" data-i18n-placeholder="form_contact_placeholder" required />
+              </label>
+              <label>
+                <span data-i18n="form_model"></span>
+                <input type="text" name="model" data-i18n-placeholder="form_model_placeholder" required />
+              </label>
+              <label>
+                <span data-i18n="form_problem"></span>
+                <textarea name="problem" rows="4" data-i18n-placeholder="form_problem_placeholder" required></textarea>
+              </label>
+              <div class="upload-grid">
+                <label class="upload-field">
+                  <span data-i18n="form_scooter_photo"></span>
+                  <input type="file" name="scooterPhoto" accept="image/*" required />
+                  <small data-i18n="form_scooter_photo_note"></small>
+                </label>
+                <label class="upload-field">
+                  <span data-i18n="form_damage_photo"></span>
+                  <input type="file" name="damagePhoto" accept="image/*" required />
+                  <small data-i18n="form_damage_photo_note"></small>
+                </label>
+              </div>
+              <p class="lead-form__hint" data-i18n="form_followup_note"></p>
+              <button class="button button--primary button--full" type="submit" data-i18n="form_submit"></button>
+              <p class="lead-form__trust" data-i18n="form_trust_note"></p>
+              <p class="form-status" aria-live="polite"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer__layout">
+          <div>
+            <strong class="company-name">[Company Name]</strong>
+            <p>Stockholm, Sweden</p>
+          </div>
+          <a class="privacy-link" href="#" data-i18n="footer_privacy"></a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="success-modal" id="success-modal" hidden aria-hidden="true">
+      <div class="success-modal__backdrop" data-close-success></div>
+      <div class="success-modal__card card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+        <div class="success-modal__icon" aria-hidden="true">✓</div>
+        <p class="pill success-modal__pill" data-i18n="success_dialog_label"></p>
+        <h2 id="success-modal-title" data-i18n="success_dialog_title"></h2>
+        <p class="success-modal__copy" data-i18n="success_dialog_body"></p>
+        <button class="button button--primary" type="button" data-close-success data-i18n="success_dialog_button"></button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
