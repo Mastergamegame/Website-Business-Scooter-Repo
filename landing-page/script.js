@@ -288,10 +288,71 @@ form?.addEventListener("submit", async (event) => {
   formData.set("model", String(form.elements.model.value || "").trim());
   formData.set("problem", String(form.elements.problem.value || "").trim());
 
-  submitButton?.setAttribute("disabled", "disabled");
-  setStatus(copy.form_status_sending);
+  submitButton?.setAttribute("di    setStatus(result?.message || copy.form_status_error);
+      return;
+    }
+  setStatusX(copy.form_status_sending);
 
-  try {
+     // New submission logic for Vercel serverless function (JSON with base64)
+    const name = (form.elements.name.value || "").trim();
+    const contact = (form.elements.contact.value || "").trim();
+    const modelVal = (form.elements.model.value || "").trim();
+    const problemVal = (form.elements.problem.value || "").trim();
+    const scooterFile = form.elements.scooterPhoto?.files?.[0];
+    const damageFile = form.elements.damagePhoto?.files?.[0];
+
+    const readFileAsDataURL = (file) => {
+      return new Promise((resolve) => {
+        if (!file) {
+          resolve(null);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => resolve(null);
+        reader.readAsDataURL(file);
+      });
+    };
+
+    const [scooterDataUrl, damageDataUrl] = await Promise.all([
+      readFileAsDataURL(scooterFile),
+      readFileAsDataURL(damageFile),
+    ]);
+
+    const payload = {
+      name,
+      contact,
+      model: modelVal,
+      problem: problemVal,
+      scooterPhoto: scooterDataUrl,
+      scooterPhotoName: scooterFile?.name || null,
+      damagePhoto: damageDataUrl,
+      damagePhotoName: damageFile?.name || null,
+ //   };
+
+    try {
+      const responseJson = await fetch(siteConfig.formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const resJson = await responseJson.json().catch(() => null);
+     if (!responseJson.ok || !resJson?.ok) {
+        setStatus(resJson?.message || copy.form_status_error);
+      } else if (resJson?.mode === "preview") {
+        setStatus(copy.form_status_preview);
+      } else {
+        setStatus(copy.form_status_success);
+      }
+      form.reset();
+      showSuccessModal();
+    } catch (e) {
+      setStatus(copy.form_status_error);
+    } finally {
+      submitButton?.removeAttribute("disabled");
+    }
+    return;
+ try {
     const response = await fetch(siteConfig.formEndpoint, {
       method: "POST",
       body: formData,
@@ -300,10 +361,7 @@ form?.addEventListener("submit", async (event) => {
     const result = await response.json().catch(() => null);
 
     if (!response.ok || !result?.ok) {
-      setStatus(result?.message || copy.form_status_error);
-      return;
-    }
-
+  
     if (result.mode === "preview") {
       setStatus(copy.form_status_preview);
     } else {
