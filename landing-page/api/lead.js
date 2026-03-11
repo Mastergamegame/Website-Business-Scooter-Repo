@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer";
 
 const RECIPIENT_EMAIL = process.env.LEAD_RECIPIENT_EMAIL || "jonasatchan@gmail.com";
-const GMAIL_USER = process.env.GMAIL_SMTP_USER || "";
-const GMAIL_APP_PASSWORD = process.env.GMAIL_SMTP_APP_PASSWORD || "";
+const GMAIL_USER = String(process.env.GMAIL_SMTP_USER || "").trim();
+const GMAIL_APP_PASSWORD = String(process.env.GMAIL_SMTP_APP_PASSWORD || "").replace(/\s+/g, "");
 
 const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
 
@@ -132,6 +132,13 @@ export default async function handler(req, res) {
     res.status(200).json({ ok: true, mode: "gmail", message: "Inquiry sent successfully." });
   } catch (error) {
     console.error("Lead delivery failed", error);
+
+    const errorMessage = String(error?.message || "");
+    if (errorMessage.includes("535-5.7.8") || errorMessage.includes("Username and Password not accepted")) {
+      res.status(500).json({ ok: false, message: "Server email login failed. Check Gmail SMTP settings." });
+      return;
+    }
+
     res.status(500).json({ ok: false, message: "Could not send the inquiry email." });
   }
 }

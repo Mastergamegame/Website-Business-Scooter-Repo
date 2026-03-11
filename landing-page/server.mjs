@@ -9,8 +9,8 @@ const __dirname = path.dirname(__filename);
 
 const PORT = Number(process.env.LANDING_PAGE_PORT || 4173);
 const RECIPIENT_EMAIL = process.env.LEAD_RECIPIENT_EMAIL || "jonasatchan@gmail.com";
-const GMAIL_USER = process.env.GMAIL_SMTP_USER || "";
-const GMAIL_APP_PASSWORD = process.env.GMAIL_SMTP_APP_PASSWORD || "";
+const GMAIL_USER = String(process.env.GMAIL_SMTP_USER || "").trim();
+const GMAIL_APP_PASSWORD = String(process.env.GMAIL_SMTP_APP_PASSWORD || "").replace(/\s+/g, "");
 const PREVIEW_DIR = path.join(__dirname, ".tmp-mail");
 
 const app = express();
@@ -187,6 +187,13 @@ app.post("/api/lead", async (req, res) => {
     });
   } catch (error) {
     console.error("Lead delivery failed", error);
+
+    const errorMessage = String(error?.message || "");
+    if (errorMessage.includes("535-5.7.8") || errorMessage.includes("Username and Password not accepted")) {
+      res.status(500).json({ ok: false, message: "Server email login failed. Check Gmail SMTP settings." });
+      return;
+    }
+
     res.status(500).json({ ok: false, message: "Could not send the inquiry email." });
   }
 });
