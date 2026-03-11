@@ -15,7 +15,7 @@ const PREVIEW_DIR = path.join(__dirname, ".tmp-mail");
 
 const app = express();
 
-app.use(express.json({ limit: "20mb" }));
+app.use(express.json({ limit: "4.5mb" }));
 app.use(express.static(__dirname));
 
 const escapeHtml = (value) =>
@@ -189,6 +189,26 @@ app.post("/api/lead", async (req, res) => {
     console.error("Lead delivery failed", error);
     res.status(500).json({ ok: false, message: "Could not send the inquiry email." });
   }
+});
+
+app.use((error, req, res, next) => {
+  if (error?.type === "entity.too.large") {
+    res.status(413).json({
+      ok: false,
+      message: "Images are too large. Please choose smaller files.",
+    });
+    return;
+  }
+
+  if (error) {
+    res.status(400).json({
+      ok: false,
+      message: error.message || "Could not process the inquiry payload.",
+    });
+    return;
+  }
+
+  next();
 });
 
 app.get("*", (req, res) => {

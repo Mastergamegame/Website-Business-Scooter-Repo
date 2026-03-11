@@ -4,6 +4,11 @@ const siteConfig = {
   formEndpoint: "/api/lead",
 };
 
+const MAX_IMAGE_DIMENSION = 1600;
+const MAX_IMAGE_BYTES = 900 * 1024;
+const INITIAL_IMAGE_QUALITY = 0.82;
+const MIN_IMAGE_QUALITY = 0.56;
+
 const translations = {
   sv: {
     page_title: "Trött på långsam support? Sälj din elscooter istället.",
@@ -68,9 +73,11 @@ const translations = {
     form_status_idle: "Skicka din förfrågan så återkommer vi om scootern verkar relevant.",
     form_status_invalid: "Fyll i de obligatoriska fälten och ladda upp båda bilderna innan du skickar.",
     form_status_missing_endpoint: "Formuläret är inte konfigurerat än.",
+    form_status_preparing: "Bearbetar bilder...",
     form_status_sending: "Skickar förfrågan...",
     form_status_success: "Tack. Din förfrågan är skickad.",
     form_status_preview: "Förfrågan togs emot lokalt. Gmail är inte konfigurerat än.",
+    form_status_payload_too_large: "Bilderna är för stora. Välj mindre eller tydligare beskurna bilder och försök igen.",
     form_status_error: "Det gick inte att skicka förfrågan just nu.",
     success_dialog_label: "Skickat",
     success_dialog_title: "Din förfrågan är skickad",
@@ -140,9 +147,11 @@ const translations = {
     form_status_idle: "Send your request and we will review it.",
     form_status_invalid: "Please complete the required fields and upload both images before sending the request.",
     form_status_missing_endpoint: "The form endpoint is not configured yet.",
+    form_status_preparing: "Optimizing images...",
     form_status_sending: "Sending request...",
     form_status_success: "Thanks. Your inquiry was sent.",
     form_status_preview: "The inquiry was captured locally. Gmail is not configured yet.",
+    form_status_payload_too_large: "The images are too large. Please choose smaller or more tightly cropped images and try again.",
     form_status_error: "Could not send the inquiry right now.",
     success_dialog_label: "Sent",
     success_dialog_title: "Your inquiry was sent",
@@ -175,10 +184,71 @@ const readFileAsDataUrl = (file) =>
     const reader = new FileReader();
 
     reader.onload = () => resolve(String(reader.result || ""));
-    reader.onerror = () => reject(new Error("File read failed"));
+    reader.onerror = () => reject(new Error("FILE_READ_FAILED"));
 
     reader.readAsDataURL(file);
   });
+
+const loadImageElement = (source) =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("IMAGE_LOAD_FAILED"));
+    image.src = source;
+  });
+
+const estimateDataUrlBytes = (value) => {
+  const base64 = String(value || "").split(",")[1] || "";
+  const padding = base64.endsWith("==") ? 2 : base64.endsWith("=") ? 1 : 0;
+  return Math.max(0, Math.floor((base64.length * 3) / 4) - padding);
+};
+
+const buildUploadName = (filename) => {
+  const safeName = String(filename || "image")
+    .replace(/\.[^.]+$/, "")
+    .replace(/[^a-z0-9_-]+/gi, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return (safeName || "image") + ".jpg";
+};
+
+const prepareUploadImage = async (file) => {
+  const source = await readFileAsDataUrl(file);
+  const image = await loadImageElement(source);
+  const maxSide = Math.max(image.naturalWidth || image.width || 1, image.naturalHeight || image.height || 1);
+  const scale = Math.min(1, MAX_IMAGE_DIMENSION / maxSide);
+  const width = Math.max(1, Math.round((image.naturalWidth || image.width || 1) * scale));
+  const height = Math.max(1, Math.round((image.naturalHeight || image.height || 1) * scale));
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    throw new Error("IMAGE_PROCESSING_FAILED");
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+  context.drawImage(image, 0, 0, width, height);
+
+  let quality = INITIAL_IMAGE_QUALITY;
+  let dataUrl = canvas.toDataURL("image/jpeg", quality);
+
+  while (estimateDataUrlBytes(dataUrl) > MAX_IMAGE_BYTES && quality > MIN_IMAGE_QUALITY) {
+    quality = Math.max(MIN_IMAGE_QUALITY, quality - 0.08);
+    dataUrl = canvas.toDataURL("image/jpeg", quality);
+  }
+
+  if (estimateDataUrlBytes(dataUrl) > MAX_IMAGE_BYTES) {
+    throw new Error("IMAGE_TOO_LARGE");
+  }
+
+  return {
+    dataUrl,
+    filename: buildUploadName(file.name),
+  };
+};
 
 const successModal = document.querySelector("#success-modal");
 const successCloseButtons = document.querySelectorAll("[data-close-success]");
@@ -302,23 +372,25 @@ form?.addEventListener("submit", async (event) => {
   const submitButton = form.querySelector('button[type="submit"]');
 
   submitButton?.setAttribute("disabled", "disabled");
-  setStatus(copy.form_status_sending);
+  setStatus(copy.form_status_preparing);
 
   try {
     const [scooterPhoto, damagePhoto] = await Promise.all([
-      readFileAsDataUrl(scooterPhotoFile),
-      readFileAsDataUrl(damagePhotoFile),
+      prepareUploadImage(scooterPhotoFile),
+      prepareUploadImage(damagePhotoFile),
     ]);
+
+    setStatus(copy.form_status_sending);
 
     const payload = {
       name: String(form.elements.name.value || "").trim(),
       contact: String(form.elements.contact.value || "").trim(),
       model: String(form.elements.model.value || "").trim(),
       problem: String(form.elements.problem.value || "").trim(),
-      scooterPhoto,
-      scooterPhotoName: scooterPhotoFile.name,
-      damagePhoto,
-      damagePhotoName: damagePhotoFile.name,
+      scooterPhoto: scooterPhoto.dataUrl,
+      scooterPhotoName: scooterPhoto.filename,
+      damagePhoto: damagePhoto.dataUrl,
+      damagePhotoName: damagePhoto.filename,
     };
 
     const response = await fetch(siteConfig.formEndpoint, {
@@ -332,6 +404,11 @@ form?.addEventListener("submit", async (event) => {
     const resJson = await response.json().catch(() => null);
 
     if (!response.ok || !resJson?.ok) {
+      if (response.status === 413) {
+        setStatus(copy.form_status_payload_too_large);
+        return;
+      }
+
       setStatus(resJson?.message || copy.form_status_error);
       return;
     }
@@ -346,6 +423,11 @@ form?.addEventListener("submit", async (event) => {
     showSuccessModal();
     return;
   } catch (error) {
+    if (error instanceof Error && error.message === "IMAGE_TOO_LARGE") {
+      setStatus(copy.form_status_payload_too_large);
+      return;
+    }
+
     setStatus(copy.form_status_error);
   } finally {
     submitButton?.removeAttribute("disabled");
