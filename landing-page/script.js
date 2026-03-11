@@ -6,48 +6,47 @@ const siteConfig = {
 
 const translations = {
   sv: {
-    page_title: "Trött på långsam support? Sälj din elscooter istället.",
+    page_title: "Trott pa langsam support? Salj din elscooter i stallet.",
     page_description:
-      "En enkel sida för personer i Stockholm som vill sälja en felaktig eller oönskad elscooter i stället för att vänta på långsam support eller sega återbetalningar.",
-    hero_eyebrow: "Stockholm - Vi köper elscootrar direkt från kunder",
-    hero_title: "Trött på långsam support? Sälj din elscooter istället.",
+      "En enkel sida for personer i Stockholm som vill salja en felaktig eller oonskad elscooter i stallet for att vanta pa langsam support eller sega aterbetalningar.",
+    hero_eyebrow: "Stockholm - Vi koper elscootrar direkt fran kunder",
+    hero_title: "Trott pa langsam support? Salj din elscooter i stallet.",
     hero_subtitle:
-      "Vi köper felaktiga eller problematiska elscootrar direkt från kunder i Stockholm. Enkelt, lokalt och utan onödigt krångel.",
-    hero_cta_primary: "Få ett erbjudande",
+      "Vi koper felaktiga eller problematiska elscootrar direkt fran kunder i Stockholm. Enkelt, lokalt och utan onodigt krangel.",
+    hero_cta_primary: "Fa ett erbjudande",
     hero_cta_secondary: "Hur det fungerar",
-    hero_note: "Vi köper scootrar direkt från kunder. Detta är ingen verkstad, butik eller officiell support.",
-    hero_chip_1: "Direktköp från kund",
-    hero_chip_2: "Enklare än att vänta",
-    hero_chip_3: "Betalning på plats",
+    hero_note: "Vi koper scootrar direkt fran kunder. Detta ar ingen verkstad, butik eller officiell support.",
+    hero_chip_1: "Direktkop fran kund",
+    hero_chip_2: "Enklare an att vanta",
+    hero_chip_3: "Betalning pa plats",
     hero_side_kicker: "Ett enklare alternativ",
-    hero_side_title: "Vi köper scootern så att du kan gå vidare snabbare.",
+    hero_side_title: "Vi koper scootern sa att du kan ga vidare snabbare.",
     hero_side_body:
-      "Om supporten tar för lång tid eller problemet drar ut på tiden kan det vara enklare att sälja scootern direkt.",
-    hero_info_area_label: "Område",
+      "Om supporten tar for lang tid eller problemet drar ut pa tiden kan det vara enklare att salja scootern direkt.",
+    hero_info_area_label: "Omrade",
     hero_info_area_value: "Stockholm",
     hero_info_focus_label: "Fokus",
-    hero_info_focus_value: "Felaktiga eller använda elscootrar",
-    hero_info_handoff_label: "Överlämning",
-    hero_info_handoff_value: "Enkel lokal överlämning",
-    hero_legal: "Oberoende tjänst. Inte officiell support och inte kopplad till Xiaomi eller Mi Store.",
+    hero_info_focus_value: "Felaktiga eller anvanda elscootrar",
+    hero_info_handoff_label: "Overlamning",
+    hero_info_handoff_value: "Enkel lokal overlamning",
+    hero_legal: "Oberoende tjanst. Inte officiell support och inte kopplad till Xiaomi eller Mi Store.",
     steps_eyebrow: "Hur det fungerar",
     steps_title: "Fyra enkla steg",
-    steps_subtitle: "Ett enkelt alternativ för dig som inte vill vänta på support eller långa processer.",
+    steps_subtitle: "Ett enkelt alternativ for dig som inte vill vanta pa support eller langa processer.",
     step_1_title: "Skicka modell och problem",
-    step_1_body: "Berätta vilken scooter du har och vad problemet verkar vara.",
-    step_2_title: "Vi bedömer scootern",
-    step_2_body: "Vi går igenom uppgifterna och ser om scootern passar oss.",
-    step_3_title: "Du får ett erbjudande",
-    step_3_body: "Om vi är intresserade kontaktar vi dig med ett enkelt erbjudande.",
-    step_4_title: "Vi möts och betalar på plats",
-    step_4_body: "Om vi kommer överens möts vi i Stockholm och betalning sker vid köp.",
-    contact_eyebrow: "Få ett erbjudande",
-    contact_title: "Berätta kort om din scooter",
-    contact_body:
-      "Fyll i några enkla uppgifter så återkommer vi om scootern är av intresse.",
-    contact_soft_1_label: "Första steg",
+    step_1_body: "Beratta vilken scooter du har och vad problemet verkar vara.",
+    step_2_title: "Vi bedomer scootern",
+    step_2_body: "Vi gar igenom uppgifterna och ser om scootern passar oss.",
+    step_3_title: "Du far ett erbjudande",
+    step_3_body: "Om vi ar intresserade kontaktar vi dig med ett enkelt erbjudande.",
+    step_4_title: "Vi mots och betalar pa plats",
+    step_4_body: "Om vi kommer overens mots vi i Stockholm och betalning sker vid kop.",
+    contact_eyebrow: "Fa ett erbjudande",
+    contact_title: "Beratta kort om din scooter",
+    contact_body: "Fyll i nagra enkla uppgifter sa aterkommer vi om scootern ar av intresse.",
+    contact_soft_1_label: "Forsta steg",
     contact_soft_1_value: "Kort och enkelt",
-    contact_soft_2_label: "Handoff",
+    contact_soft_2_label: "Overlamning",
     contact_soft_2_value: "Lokalt i Stockholm",
     contact_soft_3_label: "Kontakt",
     contact_soft_3_value: "Bara om scootern verkar relevant",
@@ -58,18 +57,18 @@ const translations = {
     form_model_placeholder: "Exempel: Xiaomi Pro 2",
     form_problem: "Beskriv problemet",
     form_problem_placeholder: "Kort beskrivning av felet",
-    form_scooter_photo: "Bild på scootern",
-    form_scooter_photo_note: "Ladda upp en tydlig bild på hela scootern.",
-    form_damage_photo: "Bild på fel eller skada",
+    form_scooter_photo: "Bild pa scootern",
+    form_scooter_photo_note: "Ladda upp en tydlig bild pa hela scootern.",
+    form_damage_photo: "Bild pa fel eller skada",
     form_damage_photo_note: "Ladda upp en bild som visar problemet tydligt.",
-    form_followup_note: "Skicka med en bild på scootern och en bild på felet så att vi kan göra en snabbare bedömning.",
+    form_followup_note: "Skicka med en bild pa scootern och en bild pa felet sa att vi kan gora en snabbare bedomning.",
     form_submit: "Skicka",
-    form_trust_note: "Vi kontaktar dig bara om scootern verkar relevant för oss.",
+    form_trust_note: "Vi kontaktar dig bara om scootern verkar relevant for oss.",
     footer_privacy: "Integritet / Privacy policy",
     form_status_idle: "Skicka din forfragan sa aterkommer vi om scootern verkar relevant.",
     form_status_invalid: "Fyll i de obligatoriska falten och ladda upp bada bilderna innan du skickar.",
     form_status_missing_endpoint: "Formularet ar inte konfigurerat an.",
-    form_status_sending: "Skickar förfrågan...",
+    form_status_sending: "Skickar forfragan...",
     form_status_success: "Tack. Din forfragan ar skickad.",
     form_status_preview: "Forfragan togs emot lokalt. Gmail ar inte konfigurerat an.",
     form_status_error: "Det gick inte att skicka forfragan just nu.",
@@ -116,8 +115,7 @@ const translations = {
     step_4_body: "If we agree, we meet in Stockholm and payment is made on purchase.",
     contact_eyebrow: "Get an offer",
     contact_title: "Tell us about your scooter",
-    contact_body:
-      "Fill in a few simple details and we will get back to you if the scooter is of interest.",
+    contact_body: "Fill in a few simple details and we will get back to you if the scooter is of interest.",
     contact_soft_1_label: "First step",
     contact_soft_1_value: "Short and easy",
     contact_soft_2_label: "Handoff",
@@ -172,6 +170,16 @@ const setStatus = (message) => {
   }
 };
 
+const readFileAsDataUrl = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(new Error("File read failed"));
+
+    reader.readAsDataURL(file);
+  });
+
 const successModal = document.querySelector("#success-modal");
 const successCloseButtons = document.querySelectorAll("[data-close-success]");
 let lastFocusedElement = null;
@@ -224,8 +232,9 @@ const renderLanguage = (lang) => {
   });
 
   document.querySelectorAll("[data-switch-lang]").forEach((button) => {
-    button.classList.toggle("is-active", button.getAttribute("data-switch-lang") === lang);
-    button.setAttribute("aria-pressed", String(button.getAttribute("data-switch-lang") === lang));
+    const isActive = button.getAttribute("data-switch-lang") === lang;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
 
   localStorage.setItem("scooter-site-language", lang);
@@ -269,6 +278,8 @@ form?.addEventListener("submit", async (event) => {
 
   const currentLanguage = document.documentElement.lang === "en" ? "en" : "sv";
   const copy = translations[currentLanguage];
+  const scooterPhotoInput = form.elements.scooterPhoto;
+  const damagePhotoInput = form.elements.damagePhoto;
 
   if (!form.reportValidity()) {
     setStatus(copy.form_status_invalid);
@@ -280,31 +291,52 @@ form?.addEventListener("submit", async (event) => {
     return;
   }
 
-  const submitButton = form.querySelector('button[type="submit"]');
-  const formData = new FormData(form);
+  const scooterPhotoFile = scooterPhotoInput?.files?.[0];
+  const damagePhotoFile = damagePhotoInput?.files?.[0];
 
-  formData.set("name", String(form.elements.name.value || "").trim());
-  formData.set("contact", String(form.elements.contact.value || "").trim());
-  formData.set("model", String(form.elements.model.value || "").trim());
-  formData.set("problem", String(form.elements.problem.value || "").trim());
+  if (!scooterPhotoFile || !damagePhotoFile) {
+    setStatus(copy.form_status_invalid);
+    return;
+  }
+
+  const submitButton = form.querySelector('button[type="submit"]');
 
   submitButton?.setAttribute("disabled", "disabled");
   setStatus(copy.form_status_sending);
 
   try {
+    const [scooterPhoto, damagePhoto] = await Promise.all([
+      readFileAsDataUrl(scooterPhotoFile),
+      readFileAsDataUrl(damagePhotoFile),
+    ]);
+
+    const payload = {
+      name: String(form.elements.name.value || "").trim(),
+      contact: String(form.elements.contact.value || "").trim(),
+      model: String(form.elements.model.value || "").trim(),
+      problem: String(form.elements.problem.value || "").trim(),
+      scooterPhoto,
+      scooterPhotoName: scooterPhotoFile.name,
+      damagePhoto,
+      damagePhotoName: damagePhotoFile.name,
+    };
+
     const response = await fetch(siteConfig.formEndpoint, {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
 
-    const result = await response.json().catch(() => null);
+    const resJson = await response.json().catch(() => null);
 
-    if (!response.ok || !result?.ok) {
-      setStatus(result?.message || copy.form_status_error);
+    if (!response.ok || !resJson?.ok) {
+      setStatus(resJson?.message || copy.form_status_error);
       return;
     }
 
-    if (result.mode === "preview") {
+    if (resJson.mode === "preview") {
       setStatus(copy.form_status_preview);
     } else {
       setStatus(copy.form_status_success);
@@ -312,6 +344,7 @@ form?.addEventListener("submit", async (event) => {
 
     form.reset();
     showSuccessModal();
+    return;
   } catch (error) {
     setStatus(copy.form_status_error);
   } finally {
