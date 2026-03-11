@@ -301,8 +301,10 @@ form?.addEventListener("submit", async (event) => {
 
   const submitButton = form.querySelector('button[type="submit"]');
 
-  submitButton?.setAttribute("disabled", "disabled");
-  setStatus(copy.form_status_sending);
+  submitButton?.setAttribute("di    setStatus(result?.message || copy.form_status_error);
+      return;
+    }
+  setStatusX(copy.form_status_sending);
 
   try {
     const [scooterPhoto, damagePhoto] = await Promise.all([
