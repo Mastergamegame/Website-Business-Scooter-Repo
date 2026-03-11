@@ -6,6 +6,14 @@ const GMAIL_APP_PASSWORD = process.env.GMAIL_SMTP_APP_PASSWORD || "";
 
 const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
 
+const escapeHtml = (value) =>
+  String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
 const readJsonBody = async (req) => {
   if (req.body && typeof req.body === "object") {
     return req.body;
@@ -57,9 +65,9 @@ export default async function handler(req, res) {
       model: String(body.model || "").trim(),
       problem: String(body.problem || "").trim(),
       scooterPhoto: body.scooterPhoto,
-      scooterPhotoName: String(body.scooterPhotoName || "scooter-photo"),
+      scooterPhotoName: String(body.scooterPhotoName || "scooter-photo.jpg"),
       damagePhoto: body.damagePhoto,
-      damagePhotoName: String(body.damagePhotoName || "damage-photo"),
+      damagePhotoName: String(body.damagePhotoName || "damage-photo.jpg"),
       submittedAt: new Date().toISOString(),
     };
 
@@ -106,11 +114,11 @@ export default async function handler(req, res) {
       ].join("\n"),
       html: [
         "<h2>New scooter inquiry</h2>",
-        "<p><strong>Name:</strong> " + lead.name + "</p>",
-        "<p><strong>Contact:</strong> " + lead.contact + "</p>",
-        "<p><strong>Scooter model:</strong> " + lead.model + "</p>",
-        "<p><strong>Issue:</strong><br />" + lead.problem.replace(/\n/g, "<br />") + "</p>",
-        "<p><strong>Submitted:</strong> " + lead.submittedAt + "</p>",
+        "<p><strong>Name:</strong> " + escapeHtml(lead.name) + "</p>",
+        "<p><strong>Contact:</strong> " + escapeHtml(lead.contact) + "</p>",
+        "<p><strong>Scooter model:</strong> " + escapeHtml(lead.model) + "</p>",
+        "<p><strong>Issue:</strong><br />" + escapeHtml(lead.problem).replace(/\n/g, "<br />") + "</p>",
+        "<p><strong>Submitted:</strong> " + escapeHtml(lead.submittedAt) + "</p>",
       ].join(""),
       attachments,
     };
@@ -120,6 +128,7 @@ export default async function handler(req, res) {
     }
 
     await transport.sendMail(mailOptions);
+
     res.status(200).json({ ok: true, mode: "gmail", message: "Inquiry sent successfully." });
   } catch (error) {
     console.error("Lead delivery failed", error);
